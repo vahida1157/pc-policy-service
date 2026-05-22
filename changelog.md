@@ -1,0 +1,9 @@
+ 
+## Version 1.0.0 - Tue 05/19/2026 
+- First release 
+ 
+## Version 1.0.1 - Tue 05/19/2026 
+- Change the port to 8080 default, as we are using api-gateway and docker, we don't need different port for micro-services 
+ 
+## Version 1.0.2 - Tue 05/19/2026 
+- Change api prefix addresses from /api/v1/... to /v1/... because of nginx consumption for routing

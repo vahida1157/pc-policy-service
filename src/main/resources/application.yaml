@@ -1,0 +1,27 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: pc-policy-service
+
+  datasource:
+    url: jdbc:postgresql://localhost:5456/pc_policy_db
+    username: dev_user
+    password: dev_password
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: dev_user
+    password: dev_password
+jwt:
+  # This is a secure 256-bit (32+ character) key.
+  # In production, NEVER hardcode this. Pass it via environment variables.
+  secret: ${JWT_SECRET:Vahak_Parent_Control_Super_Secure_Key_2026_!@#$$}
