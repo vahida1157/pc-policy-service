@@ -6,22 +6,20 @@ spring:
     name: pc-policy-service
 
   datasource:
-    url: jdbc:postgresql://localhost:5456/pc_policy_db
-    username: dev_user
-    password: dev_password
+    url: ${SPRING_DATASOURCE_URL}
+    username: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
     driver-class-name: org.postgresql.Driver
 
   jpa:
     hibernate:
       ddl-auto: update
-    show-sql: true
+    open-in-view: false
 
   rabbitmq:
-    host: localhost
-    port: 5672
-    username: dev_user
-    password: dev_password
+    host: ${SPRING_RABBITMQ_HOST}
+    port: ${SPRING_RABBITMQ_PORT}
+    username: ${SPRING_RABBITMQ_USERNAME}
+    password: ${SPRING_RABBITMQ_PASSWORD}
 jwt:
-  # This is a secure 256-bit (32+ character) key.
-  # In production, NEVER hardcode this. Pass it via environment variables.
-  secret: ${JWT_SECRET:Vahak_Parent_Control_Super_Secure_Key_2026_!@#$$}
+  secret: ${JWT_SECRET}

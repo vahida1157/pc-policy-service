@@ -6,6 +6,8 @@ import org.springframework.context.annotation.Configuration
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
 import org.springframework.security.config.http.SessionCreationPolicy
+import org.springframework.security.core.userdetails.UserDetailsService
+import org.springframework.security.core.userdetails.UsernameNotFoundException
 import org.springframework.security.oauth2.jose.jws.MacAlgorithm
 import org.springframework.security.oauth2.jwt.JwtDecoder
 import org.springframework.security.oauth2.jwt.NimbusJwtDecoder
@@ -18,6 +20,14 @@ class SecurityConfig {
 
     @Value($$"${jwt.secret}")
     private lateinit var jwtSecret: String
+
+    // 🚀 NEW: Dummy UserDetailsService to shut up the auto-generated password log
+    @Bean
+    fun userDetailsService(): UserDetailsService {
+        return UserDetailsService { username ->
+            throw UsernameNotFoundException("User $username not found. Use JWT authentication.")
+        }
+    }
 
     @Bean
     fun securityFilterChain(http: HttpSecurity): SecurityFilterChain {
@@ -39,6 +49,9 @@ class SecurityConfig {
                     jwt.decoder(jwtDecoder())
                 }
             }
+            // Disable standard Form Login and Basic Auth (This kills the default user/password requirement)
+            .formLogin { form -> form.disable() }
+            .httpBasic { basic -> basic.disable() }
 
         return http.build()
     }
