@@ -2,6 +2,7 @@ package com.vahak.pc.policy.service
 
 import com.vahak.pc.policy.domain.GlobalChildSettings
 import com.vahak.pc.policy.repository.GlobalChildSettingsRepository
+import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import java.util.*
 
@@ -18,10 +19,7 @@ class GlobalChildSettingsService(
     }
 
     fun getChildSettings(childId: UUID): GlobalChildSettings {
-        return repository.findById(childId).orElseGet {
-            // JpaRepository.save() handles its own internal transaction safely
-            repository.save(GlobalChildSettings(childId = childId))
-        }
+        return repository.findByIdOrNull(childId) ?: GlobalChildSettings(childId = childId)
     }
 
     fun updateChildSettings(settings: GlobalChildSettings): GlobalChildSettings {

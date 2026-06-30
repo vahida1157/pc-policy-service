@@ -7,7 +7,7 @@ plugins {
 }
 
 group = "com.vahak"
-version = "1.0.3"
+version = "1.1.0"
 description = "policy-service"
 
 java {
@@ -43,6 +43,9 @@ dependencies {
     implementation("io.jsonwebtoken:jjwt-api:0.13.0")
     runtimeOnly("io.jsonwebtoken:jjwt-impl:0.13.0")
     runtimeOnly("io.jsonwebtoken:jjwt-jackson:0.13.0")
+
+    // 🚀 Formats logs as JSON so Grafana can filter them easily
+    implementation("net.logstash.logback:logstash-logback-encoder:7.4")
 }
 
 kotlin {

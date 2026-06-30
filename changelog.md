@@ -9,3 +9,6 @@
 - Change api prefix addresses from /api/v1/... to /v1/... because of nginx consumption for routing 
 ## Version 1.0.3 - Wed 05/27/2026 
 - Upgrade security, pass values just from environment variable and remove from code 
+ 
+## Version 1.1.0 - Sat 07/04/2026 
+- Implement the browser settings backend 
