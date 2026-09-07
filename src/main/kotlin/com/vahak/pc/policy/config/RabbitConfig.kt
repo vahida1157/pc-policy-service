@@ -43,4 +43,25 @@ class RabbitConfig {
     fun childDeletedBinding(childDeletedQueue: Queue, childEventsExchange: TopicExchange): Binding {
         return BindingBuilder.bind(childDeletedQueue).to(childEventsExchange).with("child.deleted")
     }
+    // --- Exercise Exchange & Queues ---
+    @Bean
+    fun exerciseEventsExchange(): TopicExchange {
+        return TopicExchange("exercise.events")
+    }
+
+    @Bean
+    fun exerciseScoreEarnedQueue(): Queue {
+        return Queue("policy.exercise.score.earned.queue", true)
+    }
+
+    @Bean
+    fun exerciseScoreEarnedBinding(
+        exerciseScoreEarnedQueue: Queue,
+        exerciseEventsExchange: TopicExchange
+    ): Binding {
+        return BindingBuilder
+            .bind(exerciseScoreEarnedQueue)
+            .to(exerciseEventsExchange)
+            .with("exercise.score.earned")
+    }
 }
