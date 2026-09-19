@@ -7,7 +7,7 @@ plugins {
 }
 
 group = "com.vahak"
-version = "1.1.0"
+version = "1.1.1"
 description = "policy-service"
 
 java {

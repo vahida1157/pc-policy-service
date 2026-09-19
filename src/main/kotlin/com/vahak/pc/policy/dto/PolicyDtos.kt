@@ -1,7 +1,7 @@
 package com.vahak.pc.policy.dto
 
 import java.time.LocalTime
-import java.util.UUID
+import java.util.*
 
 // --- SETTINGS DTOs ---
 data class UpdateSettingsRequest(
@@ -23,7 +23,8 @@ data class GlobalSettingsResponse(
     val isSleepTimeActive: Boolean,
     val sleepTimeStart: LocalTime,
     val sleepTimeEnd: LocalTime,
-    val isSiteManagementActive: Boolean
+    val isSiteManagementActive: Boolean,
+    val remoteLogLevel: String?
 )
 
 // --- APP RULE DTOs ---

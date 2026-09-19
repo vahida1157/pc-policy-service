@@ -1,16 +1,18 @@
-
 package com.vahak.pc.policy.domain
 
-import jakarta.persistence.*
+import jakarta.persistence.Column
+import jakarta.persistence.Entity
+import jakarta.persistence.Id
+import jakarta.persistence.Table
 import org.hibernate.annotations.UpdateTimestamp
-import java.time.LocalTime
 import java.time.Instant
-import java.util.UUID
+import java.time.LocalTime
+import java.util.*
 
 @Entity
 @Table(name = "global_settings")
 class GlobalChildSettings(
-    
+
     // The Child's UUID from the Identity Service acts as the Primary Key here!
     @Id
     @Column(name = "child_id", updatable = false, nullable = false)
@@ -40,6 +42,10 @@ class GlobalChildSettings(
     // --- Web Filter / Site Management ---
     @Column(nullable = false)
     var isSiteManagementActive: Boolean = false,
+
+    // The remote debug flag (e.g., "VERBOSE", "DEBUG", "INFO", "WARN", "ERROR",
+    @Column(name = "remote_log_level", nullable = true)
+    var remoteLogLevel: String? = null,
 
     @UpdateTimestamp
     var updatedAt: Instant? = null

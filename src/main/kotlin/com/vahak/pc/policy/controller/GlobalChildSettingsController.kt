@@ -25,7 +25,8 @@ class GlobalChildSettingsController(
             isSleepTimeActive = settings.isSleepTimeActive,
             sleepTimeStart = settings.sleepTimeStart,
             sleepTimeEnd = settings.sleepTimeEnd,
-            isSiteManagementActive = settings.isSiteManagementActive
+            isSiteManagementActive = settings.isSiteManagementActive,
+            remoteLogLevel = settings.remoteLogLevel
         )
         return ResponseEntity.ok(response)
     }
