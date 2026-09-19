@@ -1,4 +1,11 @@
-# We only need the lightweight JRE, no JDK or Gradle needed here
+# Stage 1: Extract the layers from your pre-built fat JAR
+FROM eclipse-temurin:25-jre-alpine AS builder
+WORKDIR /build
+COPY build/libs/app.jar app.jar
+# Extract the jar using the modern 'tools' jarmode
+RUN java -Djarmode=tools -jar app.jar extract --layers --destination extracted
+
+# Stage 2: Create the final optimized image
 FROM eclipse-temurin:25-jre-alpine
 WORKDIR /app
 
@@ -6,8 +13,12 @@ WORKDIR /app
 RUN addgroup -S spring && adduser -S spring -G spring
 USER spring:spring
 
-# Simply copy the jar you ALREADY built on your host machine
-COPY build/libs/app.jar app.jar
+# Copy extracted layers from the new 'extracted' directory
+COPY --chown=spring:spring --from=builder /build/extracted/dependencies/ ./
+COPY --chown=spring:spring --from=builder /build/extracted/spring-boot-loader/ ./
+COPY --chown=spring:spring --from=builder /build/extracted/snapshot-dependencies/ ./
+COPY --chown=spring:spring --from=builder /build/extracted/application/ ./
 
 EXPOSE 8080
-ENTRYPOINT ["java", "-jar", "app.jar"]
+# Launch using Spring's specific loader class
+ENTRYPOINT ["java", "org.springframework.boot.loader.launch.JarLauncher"]
