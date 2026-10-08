@@ -1,7 +1,7 @@
 package com.vahak.pc.policy.dto
 
 import java.time.LocalTime
-import java.util.UUID
+import java.util.*
 
 // --- SETTINGS DTOs ---
 data class UpdateSettingsRequest(
@@ -12,7 +12,15 @@ data class UpdateSettingsRequest(
     val sleepTimeStart: LocalTime,
     val sleepTimeEnd: LocalTime,
     val isSiteManagementActive: Boolean,
-    val updatedAt: Long // NEW: For Last-Write-Wins
+
+    val isAdBlockActive: Boolean,
+    val isEyeFilterActive: Boolean,
+    val eyeFilterLevel: String,
+    val isEyeFilterNightBoost: Boolean,
+    val isBreakReminderActive: Boolean,
+    val breakEveryMins: Int,
+
+    val updatedAt: Long
 )
 
 data class GlobalSettingsResponse(
@@ -23,14 +31,21 @@ data class GlobalSettingsResponse(
     val isSleepTimeActive: Boolean,
     val sleepTimeStart: LocalTime,
     val sleepTimeEnd: LocalTime,
-    val isSiteManagementActive: Boolean
+    val isSiteManagementActive: Boolean,
+
+    val isAdBlockActive: Boolean,
+    val isEyeFilterActive: Boolean,
+    val eyeFilterLevel: String,
+    val isEyeFilterNightBoost: Boolean,
+    val isBreakReminderActive: Boolean,
+    val breakEveryMins: Int
 )
 
 // --- APP RULE DTOs ---
 data class AppRuleDto(
     val packageName: String,
     val isAllowed: Boolean,
-    val updatedAt: Long // NEW: For Last-Write-Wins
+    val updatedAt: Long
 )
 
 data class BulkRuleRequest(
@@ -42,7 +57,7 @@ data class BlockedDomainDto(
     val id: UUID,
     val domain: String,
     val isActive: Boolean,
-    val updatedAt: Long // NEW: For Last-Write-Wins
+    val updatedAt: Long
 )
 
 data class BulkDomainRequest(

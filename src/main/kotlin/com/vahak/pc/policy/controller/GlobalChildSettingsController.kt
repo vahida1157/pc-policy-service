@@ -25,7 +25,14 @@ class GlobalChildSettingsController(
             isSleepTimeActive = settings.isSleepTimeActive,
             sleepTimeStart = settings.sleepTimeStart,
             sleepTimeEnd = settings.sleepTimeEnd,
-            isSiteManagementActive = settings.isSiteManagementActive
+            isSiteManagementActive = settings.isSiteManagementActive,
+
+            isAdBlockActive = settings.isAdBlockActive,
+            isEyeFilterActive = settings.isEyeFilterActive,
+            eyeFilterLevel = settings.eyeFilterLevel,
+            isEyeFilterNightBoost = settings.isEyeFilterNightBoost,
+            isBreakReminderActive = settings.isBreakReminderActive,
+            breakEveryMins = settings.breakEveryMins
         )
         return ResponseEntity.ok(response)
     }
@@ -46,6 +53,14 @@ class GlobalChildSettingsController(
             settings.sleepTimeStart = request.sleepTimeStart
             settings.sleepTimeEnd = request.sleepTimeEnd
             settings.isSiteManagementActive = request.isSiteManagementActive
+
+            settings.isAdBlockActive = request.isAdBlockActive
+            settings.isEyeFilterActive = request.isEyeFilterActive
+            settings.eyeFilterLevel = request.eyeFilterLevel
+            settings.isEyeFilterNightBoost = request.isEyeFilterNightBoost
+            settings.isBreakReminderActive = request.isBreakReminderActive
+            settings.breakEveryMins = request.breakEveryMins
+
             settings.updatedAt = incomingTime
 
             service.updateChildSettings(settings)
